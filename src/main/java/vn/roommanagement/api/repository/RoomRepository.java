@@ -1,12 +1,9 @@
 package vn.roommanagement.api.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import vn.roommanagement.api.entity.Room;
+@Repository
+public interface RoomRepository extends JpaRepository<Room, Long> {
 
-import java.util.Collection;
-import java.util.Optional;
-
-public interface RoomRepository {
-    Optional<Object> findById(long id);
-
-    Collection<Room> getBooks();
 }

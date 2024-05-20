@@ -3,34 +3,33 @@ package vn.roommanagement.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import vn.roommanagement.api.common.ResponseApi;
 import vn.roommanagement.api.entity.Room;
-import vn.roommanagement.api.repository.impl.RoomRepositoryImpl;
-
-import java.util.Collection;
+import vn.roommanagement.api.repository.RoomRepository;
 
 @RestController
 @RequestMapping("api/test/v1/test")
 public class TestApiController {
 
     @Autowired
-    private RoomRepositoryImpl repository;
+    private RoomRepository repository;
 
     @GetMapping("/{id}")
-    public Room findById(@PathVariable long id) throws Exception {
-        return (Room) repository.findById(id)
-                .orElseThrow(() -> new Exception());
+    public ResponseApi findById(@PathVariable long id) throws Exception {
+        return new ResponseApi(repository.findById(id)
+                .orElseThrow(Exception::new));
     }
 
     @GetMapping("/")
-    public Collection<Room> findBooks() {
-        return repository.getBooks();
+    public ResponseApi findBooks() {
+        return new ResponseApi(repository.findAll());
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Room updateBook(
-            @PathVariable("id") final String id, @RequestBody final Room book) {
-        return book;
+            @PathVariable("id") final String id, @RequestBody final Room room) {
+        return room;
     }
 
 }
