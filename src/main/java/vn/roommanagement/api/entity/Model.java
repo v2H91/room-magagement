@@ -9,7 +9,7 @@ import java.math.BigInteger;
 
 @Entity
 @Data
-@Table(schema = "Model")
+@Table
 public class Model {
     @Id
     private BigInteger id;
