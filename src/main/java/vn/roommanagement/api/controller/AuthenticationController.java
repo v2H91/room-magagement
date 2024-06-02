@@ -3,7 +3,6 @@ package vn.roommanagement.api.controller;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +13,7 @@ import vn.roommanagement.api.dto.response.AuthenticationResponse;
 import vn.roommanagement.api.dto.response.SuccessResponse;
 import vn.roommanagement.api.service.UserService;
 import vn.roommanagement.api.utils.AuthenticationHelper;
+import vn.roommanagement.config.BaseResponse;
 
 @RestController
 @RequestMapping
@@ -24,25 +24,20 @@ public class AuthenticationController {
     private final AuthenticationHelper authenticationHelper;
 
     @PostMapping("/login")
-    public ResponseEntity<SuccessResponse<AuthenticationResponse>> login(
+    public BaseResponse<AuthenticationResponse> login(
             @Validated @RequestBody LoginRequest zaloRequest,
             HttpServletResponse res
     ) {
-
         AuthenticationResponse authentication = userService.login(zaloRequest);
-
         authenticationHelper.setCookie(authentication.getToken(), 4320, res);
-
-        SuccessResponse<AuthenticationResponse> response =
-                new SuccessResponse<>(HttpStatus.OK.value(), null, authentication);
-        return ResponseEntity.ok(response);
+        return BaseResponse.ofSucceeded(authentication);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<SuccessResponse<String>> logout(HttpServletResponse response) {
+    public BaseResponse<SuccessResponse<String>> logout(HttpServletResponse response) {
         userService.disableUserToken();
         authenticationHelper.setCookie("", 0, response);
-        return ResponseEntity.ok(new SuccessResponse<>(HttpStatus.OK.value(), null, null));
+        return BaseResponse.ofSucceeded(new SuccessResponse<>(HttpStatus.OK.value(), null, null));
     }
 
 }
