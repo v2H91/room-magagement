@@ -19,4 +19,9 @@ public class ProvinceServiceImpl implements ProvinceService {
     public List<Province> getAllProvinces() {
         return provinceRepository.findAll();
     }
+
+    @Override
+    public List<Province> getByProvinceCode(String provinceCode) {
+        return provinceRepository.findByCode(provinceCode);
+    }
 }

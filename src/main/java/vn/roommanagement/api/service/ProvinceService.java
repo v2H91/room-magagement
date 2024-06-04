@@ -7,4 +7,5 @@ import java.util.List;
 public interface ProvinceService {
 
     List<Province>getAllProvinces();
+    List<Province>getByProvinceCode(String provinceCode);
 }

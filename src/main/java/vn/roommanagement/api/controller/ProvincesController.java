@@ -3,9 +3,7 @@ package vn.roommanagement.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.roommanagement.api.entity.Province;
 import vn.roommanagement.api.service.ProvinceService;
 
@@ -24,4 +22,8 @@ public class ProvincesController {
         return ResponseEntity.ok(provinceService.getAllProvinces());
     }
 
+    @GetMapping("/{provinceCode}")
+    public ResponseEntity<List<Province>>getByCode(@PathVariable String provinceCode){
+        return  ResponseEntity.ok(provinceService.getByProvinceCode(provinceCode));
+    }
 }
