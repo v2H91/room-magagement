@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vn.roommanagement.api.common.ObjectResponse;
 import vn.roommanagement.api.common.ResponseApi;
+import vn.roommanagement.api.dto.response.DistrictResponseDto;
 import vn.roommanagement.api.entity.District;
 import vn.roommanagement.api.repository.DistrictRepository;
 import vn.roommanagement.api.service.DistrictService;
+import vn.roommanagement.config.BaseResponse;
 
 import java.util.List;
 
@@ -27,10 +29,9 @@ public class DistrictController {
     private DistrictService districtService;
 
     @GetMapping("/{provinceCode}")
-    public ResponseEntity<List<District>> getDistrictsByProvince(@PathVariable String provinceCode) {
-
+    public BaseResponse<List<DistrictResponseDto>> getDistrictsByProvince(@PathVariable String provinceCode) {
 //        return new ResponseApi(districtService.getDistrictsByProvince(provinceCode));
-        return  ResponseEntity.ok( districtService.getDistrictsByProvince(provinceCode));
+        return  BaseResponse.ofSucceeded( districtService.getDistrictsByProvince(provinceCode));
     }
 
 

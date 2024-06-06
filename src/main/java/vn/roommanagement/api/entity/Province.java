@@ -34,4 +34,5 @@ public class Province {
     @JoinColumn(name = "administrative_region_id")
     private AdministrativeRegion administrativeRegion;
 
+
 }

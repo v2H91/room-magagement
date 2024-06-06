@@ -1,8 +1,10 @@
 package vn.roommanagement.api.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "wards")
 public class Ward {
 

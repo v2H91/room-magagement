@@ -1,5 +1,6 @@
 package vn.roommanagement.api.controller;
 
+
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,8 @@ public class AuthenticationController {
     public BaseResponse<AuthenticationResponse> login(
             @Validated @RequestBody LoginRequest zaloRequest,
             HttpServletResponse res
-    ) {
+            ) {
+
         AuthenticationResponse authentication = userService.login(zaloRequest);
         authenticationHelper.setCookie(authentication.getToken(), 4320, res);
         return BaseResponse.ofSucceeded(authentication);
