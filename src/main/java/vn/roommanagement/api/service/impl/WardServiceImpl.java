@@ -31,7 +31,8 @@ public class WardServiceImpl implements WardService {
     }
 
     @Override
-    public List<Ward> getAll() {
-        return wardRepository.findAll();
+    public List<WardResponseDto> getAll() {
+        List<Ward> list  = wardRepository.findAll();
+        return list.stream().map(WardResponseDto::wardResponseDto).collect(Collectors.toList());
     }
 }

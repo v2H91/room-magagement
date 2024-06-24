@@ -24,7 +24,7 @@ public class WardController {
         return BaseResponse.ofSucceeded(wardService.getByDistrictCode(districtCode));
     }
     @GetMapping("/get-all")
-    public BaseResponse<List<Ward>> getAll(){
+    public BaseResponse<List<WardResponseDto>> getAll(){
         return  BaseResponse.ofSucceeded(wardService.getAll());
     }
 }

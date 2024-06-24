@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public interface  WardService {
     List<WardResponseDto> getByDistrictCode(String districtCode);
-    List<Ward> getAll ();
+    List<WardResponseDto> getAll ();
 
 
 }
