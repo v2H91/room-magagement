@@ -22,7 +22,6 @@ public class ProvinceServiceImpl implements ProvinceService {
     public List<ProvinceResponseDto> getAllProvinces() {
 
      List<Province> provinces = provinceRepository.findAll();
-
         return provinces.stream().map(ProvinceResponseDto::provinceDto).collect(Collectors.toList());
     }
 
